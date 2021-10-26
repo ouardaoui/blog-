@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
-import { BlogContext } from "../context/BlogContext";
+import { Text, View, StyleSheet, Button, FlatList } from "react-native";
+import { Context } from "../context/BlogContext";
 const IndexScreen = () => {
-  const { data, addBlogPost } = useContext(BlogContext);
+  const { state, addBlogPost } = useContext(Context);
 
   return (
     <View>
       <Text>Index screen</Text>
       <Button title="add post" onPress={addBlogPost} />
       <FlatList
-        data={data}
-        keyExtractor={(data) => data.title}
+        data={state}
+        keyExtractor={(state) => state.title}
         renderItem={({ item }) => {
           return <Text>{item.title}</Text>
         }}
