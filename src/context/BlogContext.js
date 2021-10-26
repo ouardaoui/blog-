@@ -5,5 +5,9 @@ const addBlogPost = (dispatch) => {
   return () =>
     dispatch({ type: "ADD_blogpost" })
 };
-export const { Context, Provider } = createDataContext(blogReducer, { addBlogPost }, [])
+const deleteBlogPost = (dispatch) => {
+  return (id) =>
+    dispatch({ type: "DELETE_blogpost", payload: id })
+};
+export const { Context, Provider } = createDataContext(blogReducer, { addBlogPost, deleteBlogPost }, [])
 
