@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Text, View, StyleSheet, Button, FlatList, TouchableOpacity } from "react-native";
 import { Context } from "../context/BlogContext";
 import { Feather } from '@expo/vector-icons';
 const IndexScreen = ({ navigation }) => {
-  const { state, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost, getBlogPost } = useContext(Context);
   navigation.setOptions({
     headerRight: () => (
       <TouchableOpacity onPress={() => navigation.navigate("CreateScreen")}>
@@ -11,6 +11,12 @@ const IndexScreen = ({ navigation }) => {
       </TouchableOpacity>
     ),
   });
+  useEffect(() => {
+    getBlogPost()
+    navigation.addListener("focus", () => {
+      getBlogPost();
+    })
+  }, [])
   return (
     <View>
       <FlatList
